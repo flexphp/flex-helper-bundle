@@ -33,7 +33,7 @@ trait FactoryExtendedTrait
     {
         $_data = [];
 
-        \array_map(function (string $key, ?string $value) use ($prefix, &$_data): void {
+        \array_map(function (string $key, $value) use ($prefix, &$_data): void {
             if (\strpos($key, $prefix) !== false) {
                 $_data[\substr($key, \strlen($prefix))] = $value;
             }
