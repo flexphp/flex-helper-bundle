@@ -9,6 +9,7 @@
  */
 namespace FlexPHP\Bundle\HelperBundle\Domain\Helper;
 
+use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Query\QueryBuilder;
 
 class DbalCriteriaHelper
@@ -73,7 +74,7 @@ class DbalCriteriaHelper
             $this->query->setParameter(":{$column}", "%{$value}%");
         } else {
             $this->query->andWhere("{$alias}.{$column} {$operator} :{$column}");
-            $this->query->setParameter(":{$column}", $value);
+            $this->query->setParameter(":{$column}", $value, is_int($value) ? ParameterType::INTEGER : ParameterType::STRING);
         }
     }
 }
